@@ -2,12 +2,24 @@ version: '3.1'
 
 services:
 
-  postgresDB:
+  postgres:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: adminPassword123
       POSTGRES_USER: admin
-      POSTGRES_DB: users
+      POSTGRES_PASSWORD: adminPassword123
+      POSTGRES_DB: NEST_DB
     ports:
       - 5432:5432
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminPassword123
+      MONGO_INITDB_DATABASE: NEST_DB
+    ports:
+      - 27017:27017
+    volumes:
+      - ./database/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
