@@ -9,6 +9,7 @@ export class UsersController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
+    console.log('usuario a crear =>', createUserDto);
     return this.usersService.create(createUserDto);
   }
 
@@ -24,6 +25,7 @@ export class UsersController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    console.log('usuario a actualizar =>', updateUserDto);
     return this.usersService.update(+id, updateUserDto);
   }
 
