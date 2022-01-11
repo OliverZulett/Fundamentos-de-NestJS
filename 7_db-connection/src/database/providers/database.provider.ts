@@ -21,6 +21,8 @@ export const databaseProviders = [
   {
     provide: 'MONGODB_CONNECTION',
     useFactory: (): Promise<typeof mongoose> =>
-      mongoose.connect('mongodb://admin:adminPassword123@localhost:27017/NEST_DB'),
+      mongoose.connect(
+        'mongodb://admin:adminPassword123@localhost:27017/NEST_DB',
+      ),
   },
 ];
