@@ -8,11 +8,11 @@ export const databaseProviders = [
     useFactory: async () =>
       await createConnection({
         type: 'postgres',
-        host: 'localhost',
-        port: 5432,
-        username: 'admin',
-        password: 'adminPassword123',
-        database: 'NEST_DB',
+        host: process.env.DATABASE_HOST,
+        port: Number(process.env.DATABASE_PORT_POSTGRES) || 5432,
+        username: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD,
+        database: process.env.DATABASE_NAME,
         entities: [User],
         // entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true, //no usar en produccion
@@ -22,7 +22,7 @@ export const databaseProviders = [
     provide: 'MONGODB_CONNECTION',
     useFactory: (): Promise<typeof mongoose> =>
       mongoose.connect(
-        'mongodb://admin:adminPassword123@localhost:27017/NEST_DB',
+        `mongodb://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT_MONGODB || 27017}/${process.env.DATABASE_NAME}`,
       ),
   },
 ];
