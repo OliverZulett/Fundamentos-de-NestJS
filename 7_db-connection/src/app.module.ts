@@ -8,10 +8,12 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    UsersModule, 
-    DatabaseModule, 
+    UsersModule,
+    DatabaseModule,
     ProductsModule,
-    ConfigModule.forRoot()
+    ConfigModule.forRoot({
+      envFilePath: ['.prod.env', '.local.env', '.env'],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
